@@ -1,26 +1,36 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Welcome to Your Vue.js App" />
+  <TheHeader />
+  <CryptoPrices />
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import CryptoPrices from "./components/CryptoPrices/CryptoPrices.vue";
+import TheHeader from "./components/Header/TheHeader.vue";
 
 export default {
   name: "App",
   components: {
-    HelloWorld,
+    CryptoPrices,
+    TheHeader,
   },
 };
 </script>
 
 <style>
+:root {
+  --primary-color: rgb(255, 255, 255);
+  --bg-color: rgb(6, 17, 33);
+  --border: 0.5px solid rgb(190, 190, 190);
+  --font: rgb(236, 236, 236);
+}
+body {
+  margin: 0;
+  background-color: var(--bg-color);
+}
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Calibri, Candara, Segoe, Segoe UI, Optima, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 </style>

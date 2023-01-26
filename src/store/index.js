@@ -10,7 +10,6 @@ export default createStore({
     ADD_FAVCOIN: (state, favCoin) => {
       if (state.favCoins.length < 5) {
         state.favCoins.push(favCoin);
-        console.log(favCoin);
       } else {
         console.log("too much coins!");
       }

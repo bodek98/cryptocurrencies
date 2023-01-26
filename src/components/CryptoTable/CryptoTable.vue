@@ -20,7 +20,7 @@
           </tr>
         </thead>
         <!-- table data -->
-        <tr v-for="coin in coins" :key="coin.id" class="table__row">
+        <tr v-for="coin in coins" :key="coin.name" class="table__row">
           <td class="table__coin--small table__coin--alignCenter">
             <span @click="addFavCoin(coin)">
               <font-awesome-icon icon="fa-regular fa-star" />
@@ -46,7 +46,7 @@
 
 <script>
 import axios from "axios";
-import { onMounted, ref } from "vue";
+import { ref } from "vue";
 import { useStore } from "vuex";
 
 export default {
@@ -64,14 +64,13 @@ export default {
         console.log(error);
       }
     };
-    // add coin to favourites
+
     const addFavCoin = (coin) => {
       return store.dispatch("addFavCoin", coin);
     };
 
-    onMounted(() => {
-      getCoins();
-    });
+    getCoins();
+
     return {
       coins,
       addFavCoin,

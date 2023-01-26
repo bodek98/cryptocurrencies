@@ -1,7 +1,7 @@
 .header {
   display: flex;
   align-items: center;
-  width: 100vw;
+  width: 100%;
   gap: 1rem;
   text-align: start;
   color: var(--font);
@@ -12,7 +12,6 @@
     margin: 1rem 0;
     padding: 0 2rem;
     font-size: 2rem;
-    border-right: 0.5px solid rgb(243, 243, 243);
   }
   &__info {
     font-size: large;

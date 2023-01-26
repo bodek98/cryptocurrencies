@@ -3,9 +3,14 @@
     <table class="table__data">
       <!-- table head -->
       <thead>
-        <tr class="table__row">
-          <th class="table__coin--small">Rank</th>
-          <th class="table__coin">Coin</th>
+        <tr class="table__headRow">
+          <th class="table__coin table__coin--small table__coin--alignCenter">
+            #
+          </th>
+          <th class="table__coin table__coin--small table__coin--alignCenter">
+            Rank
+          </th>
+          <th class="table__coin table__coin--alignCenter">Coin</th>
           <th class="table__coin">Current Price</th>
           <th class="table__coin">1h%</th>
           <th class="table__coin">Volume</th>
@@ -14,7 +19,10 @@
       </thead>
       <!-- table data -->
       <tr v-for="coin in coins" :key="coin.name" class="table__row">
-        <td class="table__coin table__coin--rank">
+        <td class="table__coin--small table__coin--alignCenter">
+          <span> <font-awesome-icon icon="fa-regular fa-star" /> </span>
+        </td>
+        <td class="table__coin table__coin--small table__coin--alignCenter">
           {{ coin.market_cap_rank }}
         </td>
         <td class="table__coin table__coin--data">

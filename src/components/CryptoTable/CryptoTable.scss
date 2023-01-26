@@ -3,10 +3,12 @@
   margin: 2rem auto 0 auto;
   left: 0;
   right: 0;
+  background-color: #fff;
+  padding: 10px 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 60vw;
+  width: 70vw;
   min-width: 670px;
   color: var(--font);
   &__data {
@@ -14,18 +16,33 @@
     flex-direction: column;
     width: 100%;
     background-color: var(--primary);
-    border: var(--border);
+  }
+  &__headRow {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
   }
   &__row {
     display: flex;
     justify-content: space-around;
     align-items: center;
     gap: 1rem;
+    &:hover {
+      background-color: rgba(45, 117, 218, 0.164);
+      cursor: pointer;
+    }
   }
   &__coin {
     width: 15%;
-    &--rank {
+    text-align: end;
+    font-size: 1rem;
+    &--small {
       width: 5%;
+    }
+    &--alignCenter {
+      text-align: center;
     }
     &--data {
       display: flex;
@@ -35,7 +52,7 @@
     }
     &--symbol {
       font-size: 0.7rem;
-      color: rgba(255, 255, 255, 0.247);
+      color: rgba(0, 0, 0, 0.308);
     }
     &--logo {
       height: 2rem;

@@ -1,13 +1,15 @@
 .header {
   display: flex;
   align-items: center;
-  gap: 10px;
+  width: 100vw;
+  gap: 1rem;
   text-align: start;
   color: var(--font);
-  // background-color: var(--bg-color);
-  width: 100%;
+  background-color: var(--primary-color);
+  box-shadow: #ff7b0059 0px 5px 15px;
   &__logo {
-    margin: 0;
+    color: rgb(255, 126, 40);
+    margin: 1rem 0;
     padding: 0 2rem;
     font-size: 2rem;
     border-right: 0.5px solid rgb(243, 243, 243);

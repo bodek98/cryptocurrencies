@@ -1,10 +1,13 @@
 <template>
-  <TheHeader />
-  <CryptoTable v-if="isCryptoSelected" CryptoTable />
-  <CryptoTable />
+  <div class="mainContainer">
+    <TheHeader />
+    <CryptoFav />
+    <CryptoTable />
+  </div>
 </template>
 
 <script>
+import CryptoFav from "./components/CryptoFav/CryptoFav.vue";
 import CryptoTable from "./components/CryptoTable/CryptoTable.vue";
 import TheHeader from "./components/Header/TheHeader.vue";
 import { ref } from "vue";
@@ -12,6 +15,7 @@ import { ref } from "vue";
 export default {
   name: "App",
   components: {
+    CryptoFav,
     CryptoTable,
     TheHeader,
   },
@@ -40,6 +44,11 @@ body {
   font-size: 20px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+}
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 3rem;
 }
 </style>

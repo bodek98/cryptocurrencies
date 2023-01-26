@@ -27,7 +27,7 @@
           <!-- table data -->
           <tr v-for="coin in favCoins" :key="coin.id" class="table__row">
             <td class="table__coin--small table__coin--alignCenter">
-              <span>
+              <span @click="removeFavCoin(coin.id)">
                 <font-awesome-icon icon="fa-regular fa-star" />
               </span>
             </td>
@@ -62,10 +62,13 @@ export default {
   setup() {
     const store = useStore();
     let favCoins = ref(store.state.favCoins);
+    const removeFavCoin = (coin) => {
+      return store.dispatch("removeFavCoin", coin);
+    };
 
     return {
       favCoins,
-      store,
+      removeFavCoin,
     };
   },
 };

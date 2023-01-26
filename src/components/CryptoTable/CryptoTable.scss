@@ -1,0 +1,44 @@
+.table {
+  position: absolute;
+  margin: 2rem auto 0 auto;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 60vw;
+  min-width: 670px;
+  color: var(--font);
+  &__data {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: var(--primary);
+    border: var(--border);
+  }
+  &__row {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 1rem;
+  }
+  &__coin {
+    width: 15%;
+    &--rank {
+      width: 5%;
+    }
+    &--data {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: flex-start;
+      align-items: center;
+    }
+    &--symbol {
+      font-size: 0.7rem;
+      color: rgba(255, 255, 255, 0.247);
+    }
+    &--logo {
+      height: 2rem;
+    }
+  }
+}

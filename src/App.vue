@@ -1,17 +1,25 @@
 <template>
   <TheHeader />
-  <CryptoPrices />
+  <CryptoTable v-if="isCryptoSelected" CryptoTable />
+  <CryptoTable />
 </template>
 
 <script>
-import CryptoPrices from "./components/CryptoPrices/CryptoPrices.vue";
+import CryptoTable from "./components/CryptoTable/CryptoTable.vue";
 import TheHeader from "./components/Header/TheHeader.vue";
+import { ref } from "vue";
 
 export default {
   name: "App",
   components: {
-    CryptoPrices,
+    CryptoTable,
     TheHeader,
+  },
+  setup() {
+    let isCryptoSelected = ref(false);
+    return {
+      isCryptoSelected,
+    };
   },
 };
 </script>

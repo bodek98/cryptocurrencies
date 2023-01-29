@@ -1,6 +1,7 @@
 <template>
   <div class="mainContainer">
     <TheHeader />
+    <CryptoChart />
     <CryptoFav />
     <CryptoTable />
   </div>
@@ -10,6 +11,7 @@
 import CryptoFav from "./components/CryptoFav/CryptoFav.vue";
 import CryptoTable from "./components/CryptoTable/CryptoTable.vue";
 import TheHeader from "./components/Header/TheHeader.vue";
+import CryptoChart from "./components/CryptoChart/CryptoChart.vue";
 import { ref } from "vue";
 
 export default {
@@ -18,6 +20,7 @@ export default {
     CryptoFav,
     CryptoTable,
     TheHeader,
+    CryptoChart,
   },
   setup() {
     let isCryptoSelected = ref(false);

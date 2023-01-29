@@ -45,31 +45,22 @@
 </template>
 
 <script>
-import axios from "axios";
-import { ref } from "vue";
 import { useStore } from "vuex";
 
 export default {
   setup() {
     const store = useStore();
-    const coins = ref([]);
+    const coins = store.state.coins;
     // api call function
-    const getCoins = async () => {
-      try {
-        const res = await axios.get(
-          "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=1h"
-        );
-        coins.value = res.data;
-      } catch (error) {
-        console.log(error);
-      }
+    const getCoins = () => {
+      return store.dispatch("getCoins");
     };
+
+    getCoins();
 
     const addFavCoin = (coin) => {
       return store.dispatch("addFavCoin", coin);
     };
-
-    getCoins();
 
     return {
       coins,

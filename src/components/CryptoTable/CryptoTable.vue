@@ -20,7 +20,11 @@
           </tr>
         </thead>
         <!-- table data -->
-        <tr v-for="coin in coins" :key="coin.name" class="table__row">
+        <tr
+          v-for="coin in $store.state.coins"
+          :key="coin.name"
+          class="table__row"
+        >
           <td class="table__coin--small table__coin--alignCenter">
             <span @click="addFavCoin(coin)">
               <font-awesome-icon icon="fa-regular fa-star" />
@@ -50,20 +54,17 @@ import { useStore } from "vuex";
 export default {
   setup() {
     const store = useStore();
-    const coins = store.state.coins;
+
     // api call function
     const getCoins = () => {
       return store.dispatch("getCoins");
     };
-
-    getCoins();
-
     const addFavCoin = (coin) => {
       return store.dispatch("addFavCoin", coin);
     };
 
+    getCoins();
     return {
-      coins,
       addFavCoin,
     };
   },

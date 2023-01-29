@@ -8,9 +8,12 @@
 import axios from "axios";
 import Chart from "chart.js/auto";
 import { onMounted, ref } from "vue";
+import { useStore } from "vuex";
 
 export default {
   setup() {
+    const store = useStore();
+    let favCoins = ref(store.state.favCoins);
     let price = ref([]);
     let time = ref([]);
     let dates = ref([]);
@@ -26,7 +29,6 @@ export default {
             data.value = res.data.prices;
             time.value = data.value.map((p) => p[0]);
             price.value = data.value.map((p) => p[1]);
-            console.log(data.value);
           });
       } catch (error) {
         console.log(error);
@@ -43,7 +45,6 @@ export default {
       await getPrices();
       timestampToDate();
       const ctx = document.getElementById("cryptoChart");
-      console.log(time.value);
       new Chart(ctx, {
         type: "line",
         data: {
@@ -58,6 +59,7 @@ export default {
         },
       });
     });
+    return favCoins;
   },
 };
 </script>

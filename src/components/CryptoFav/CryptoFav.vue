@@ -62,6 +62,7 @@ export default {
   setup() {
     const store = useStore();
     let favCoins = ref(store.state.favCoins);
+
     const removeFavCoin = (coin) => {
       return store.dispatch("removeFavCoin", coin);
     };

@@ -6,10 +6,15 @@ export default createStore({
   state: {
     coins: [],
     favCoins: [],
+    favCoinPrices: [],
   },
   mutations: {
     GET_COINS: (state, coins) => {
       state.coins = coins;
+    },
+    GET_FAVCOIN_PRICES: (state, coins) => {
+      state.favCoinPrices = coins;
+      console.log(state.favCoinPrices);
     },
     ADD_FAVCOIN: (state, favCoin) => {
       if (state.favCoins.length < 5) {
@@ -39,8 +44,19 @@ export default createStore({
         console.log(error);
       }
     },
-    addFavCoin({ commit }, favCoin) {
+
+    async addFavCoin({ commit }, favCoin) {
+      await axios
+        .get(
+          "https://api.coingecko.com/api/v3/coins/" +
+            favCoin.id +
+            "/market_chart?vs_currency=usd&days=1&interval=hourly"
+        )
+        .then((res) => {
+          commit("GET_FAVCOIN_PRICES", res.data.prices);
+        });
       commit("ADD_FAVCOIN", favCoin);
+      console.log(favCoin.id);
     },
     removeFavCoin({ commit }, favCoinId) {
       commit("REMOVE_FAVCOIN", favCoinId);

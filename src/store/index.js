@@ -14,7 +14,8 @@ export default createStore({
     },
     GET_FAVCOIN_PRICES: (state, coins) => {
       state.favCoinPrices = coins;
-      console.log(state.favCoinPrices);
+      console.log("GET_FAVCOIN_PRICES");
+      // console.log(state.favCoinPrices);
     },
     ADD_FAVCOIN: (state, favCoin) => {
       if (state.favCoins.length < 5) {
@@ -28,6 +29,8 @@ export default createStore({
         (obj) => obj.id === favCoinId
       );
       state.favCoins.splice(objWithIdIndex, 1);
+      // console.log(state.favCoins);
+      console.log(state.favCoins.length);
     },
   },
   actions: {
@@ -44,8 +47,7 @@ export default createStore({
         console.log(error);
       }
     },
-
-    async addFavCoin({ commit }, favCoin) {
+    async getFavCoinPrices({ commit }, favCoin) {
       await axios
         .get(
           "https://api.coingecko.com/api/v3/coins/" +
@@ -54,12 +56,16 @@ export default createStore({
         )
         .then((res) => {
           commit("GET_FAVCOIN_PRICES", res.data.prices);
+          console.log("getFavCoinPrices from store");
+          commit("ADD_FAVCOIN", favCoin);
         });
-      commit("ADD_FAVCOIN", favCoin);
-      console.log(favCoin.id);
     },
-    removeFavCoin({ commit }, favCoinId) {
-      commit("REMOVE_FAVCOIN", favCoinId);
+    addFavCoin({ dispatch }, favCoin) {
+      dispatch("getFavCoinPrices", favCoin);
+      console.log("add from store");
+    },
+    removeFavCoin({ commit }, favCoin, favCoinId) {
+      commit("REMOVE_FAVCOIN", favCoin, favCoinId);
     },
   },
   plugins: [createPersistedState()],

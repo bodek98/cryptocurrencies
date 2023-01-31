@@ -65,7 +65,6 @@ export default {
 
     const removeFavCoin = (coin) => {
       return store.dispatch("removeFavCoin", coin);
-      // store.dispatch("getFavCoinPrices", coin)
     };
 
     return {

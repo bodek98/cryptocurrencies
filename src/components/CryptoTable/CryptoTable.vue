@@ -60,10 +60,11 @@ export default {
       return store.dispatch("getCoins");
     };
     const addFavCoin = (coin) => {
-      return store.dispatch("addFavCoin", coin);
+      return store.dispatch("addDatasets", coin);
     };
 
     getCoins();
+
     return {
       addFavCoin,
     };

@@ -1,4 +1,5 @@
 import { createStore } from "vuex";
+import { ref } from "vue";
 import createPersistedState from "vuex-persistedstate";
 import axios from "axios";
 
@@ -6,17 +7,31 @@ export default createStore({
   state: {
     coins: [],
     favCoins: [],
-    favCoinPrices: [],
+    chartDatasets: [],
+    chartLabels: [],
   },
   mutations: {
     GET_COINS: (state, coins) => {
       state.coins = coins;
     },
-    GET_FAVCOIN_PRICES: (state, coins) => {
-      state.favCoinPrices = coins;
-      console.log("GET_FAVCOIN_PRICES");
-      // console.log(state.favCoinPrices);
+
+    ADD_DATASETS: (state, favCoinData) => {
+      let randomColor = Math.floor(Math.random() * 16777215).toString(16);
+      let time = ref([]);
+      let dates = ref([]);
+      time.value = favCoinData.prices.map((p) => p[0]);
+      time.value.forEach((timestamp) => {
+        let date = new Date(timestamp);
+        dates.value.push(date.getHours());
+      });
+      state.chartLabels = dates.value;
+      state.chartDatasets.push({
+        label: favCoinData.id,
+        data: favCoinData.prices,
+        borderColor: "#" + randomColor,
+      });
     },
+
     ADD_FAVCOIN: (state, favCoin) => {
       if (state.favCoins.length < 5) {
         state.favCoins.push(favCoin);
@@ -24,13 +39,12 @@ export default createStore({
         console.log("too much coins!");
       }
     },
+
     REMOVE_FAVCOIN: (state, favCoinId) => {
       const objWithIdIndex = state.favCoins.findIndex(
         (obj) => obj.id === favCoinId
       );
       state.favCoins.splice(objWithIdIndex, 1);
-      // console.log(state.favCoins);
-      console.log(state.favCoins.length);
     },
   },
   actions: {
@@ -47,7 +61,8 @@ export default createStore({
         console.log(error);
       }
     },
-    async getFavCoinPrices({ commit }, favCoin) {
+
+    async addDatasets({ commit, dispatch }, favCoin) {
       await axios
         .get(
           "https://api.coingecko.com/api/v3/coins/" +
@@ -55,17 +70,19 @@ export default createStore({
             "/market_chart?vs_currency=usd&days=1&interval=hourly"
         )
         .then((res) => {
-          commit("GET_FAVCOIN_PRICES", res.data.prices);
-          console.log("getFavCoinPrices from store");
-          commit("ADD_FAVCOIN", favCoin);
+          const prices = res.data.prices;
+          const id = favCoin.id;
+          commit("ADD_DATASETS", { prices, id });
+          dispatch("addFavCoin", favCoin);
         });
     },
-    addFavCoin({ dispatch }, favCoin) {
-      dispatch("getFavCoinPrices", favCoin);
-      console.log("add from store");
+
+    addFavCoin({ commit }, favCoin) {
+      commit("ADD_FAVCOIN", favCoin);
     },
-    removeFavCoin({ commit }, favCoin, favCoinId) {
-      commit("REMOVE_FAVCOIN", favCoin, favCoinId);
+
+    removeFavCoin({ commit }, favCoin) {
+      commit("REMOVE_FAVCOIN", favCoin);
     },
   },
   plugins: [createPersistedState()],

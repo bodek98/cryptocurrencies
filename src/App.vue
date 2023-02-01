@@ -34,7 +34,7 @@ export default {
 <style>
 :root {
   --primary-color: rgb(255, 255, 255);
-  --bg-color: rgb(233, 234, 236);
+  --bg-color: rgb(248, 248, 248);
   --border: 0.5px solid rgb(190, 190, 190);
   /* --font: rgb(236, 236, 236); */
 }

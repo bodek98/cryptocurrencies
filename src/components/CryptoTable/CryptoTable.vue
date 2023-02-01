@@ -24,6 +24,7 @@
           v-for="coin in $store.state.coins"
           :key="coin.name"
           class="table__row"
+          :id="coin.id + '-row'"
         >
           <td class="table__coin--small table__coin--alignCenter">
             <span @click="addFavCoin(coin)">
@@ -54,13 +55,12 @@ import { useStore } from "vuex";
 export default {
   setup() {
     const store = useStore();
-
     // api call function
     const getCoins = () => {
       return store.dispatch("getCoins");
     };
     const addFavCoin = (coin) => {
-      return store.dispatch("addDatasets", coin);
+      return store.dispatch("addChartData", coin);
     };
 
     getCoins();

@@ -23,19 +23,24 @@ export default {
     );
 
     onMounted(async () => {
-      const ctx = document.getElementById("cryptoChart");
+      const ctx = document.getElementById("cryptoChart").getContext("2d");
       chart = new Chart(ctx, {
         type: "line",
-        label: "elo",
+        label: "Cryptocurrencies chart",
         data: {
           labels: store.state.chartLabels,
           datasets: store.state.chartDatasets,
         },
         options: {
+          elements: {
+            point: {
+              radius: 1,
+            },
+          },
           responsive: true,
           plugins: {
-            legend: {
-              display: false,
+            filler: {
+              propagate: true,
             },
           },
         },

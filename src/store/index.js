@@ -15,7 +15,7 @@ export default createStore({
       state.coins = coins;
     },
 
-    ADD_DATASETS: (state, favCoinData) => {
+    ADD_CHARTDATA: (state, favCoinData) => {
       let randomColor = Math.floor(Math.random() * 16777215).toString(16);
       let time = ref([]);
       let dates = ref([]);
@@ -26,10 +26,23 @@ export default createStore({
       });
       state.chartLabels = dates.value;
       state.chartDatasets.push({
-        label: favCoinData.id,
+        // fill: {
+        //   target: "origin",
+        //   above: "rgb(255, 0, 0)", // Area will be red above the origin
+        //   below: "rgb(0, 0, 255)", // And blue below the origin
+        // },
+        label: favCoinData.favCoin.name,
         data: favCoinData.prices,
         borderColor: "#" + randomColor,
+        backgroundColor: "#" + randomColor,
       });
+    },
+
+    REMOVE_CHARTDATA: (state, favCoin) => {
+      const objWithIdIndex = state.favCoins.findIndex(
+        (obj) => obj.id === favCoin.id
+      );
+      state.chartDatasets.splice(objWithIdIndex, 1);
     },
 
     ADD_FAVCOIN: (state, favCoin) => {
@@ -40,9 +53,9 @@ export default createStore({
       }
     },
 
-    REMOVE_FAVCOIN: (state, favCoinId) => {
+    REMOVE_FAVCOIN: (state, favCoin) => {
       const objWithIdIndex = state.favCoins.findIndex(
-        (obj) => obj.id === favCoinId
+        (obj) => obj.id === favCoin.id
       );
       state.favCoins.splice(objWithIdIndex, 1);
     },
@@ -62,7 +75,7 @@ export default createStore({
       }
     },
 
-    async addDatasets({ commit, dispatch }, favCoin) {
+    async addChartData({ commit, dispatch }, favCoin) {
       await axios
         .get(
           "https://api.coingecko.com/api/v3/coins/" +
@@ -71,10 +84,17 @@ export default createStore({
         )
         .then((res) => {
           const prices = res.data.prices;
-          const id = favCoin.id;
-          commit("ADD_DATASETS", { prices, id });
+          for (let i = 0; i < this.state.favCoins.length; i++) {
+            if (this.state.favCoins[i].id === favCoin.id) return;
+          }
+          commit("ADD_CHARTDATA", { prices, favCoin });
           dispatch("addFavCoin", favCoin);
         });
+    },
+
+    async removeChartData({ commit, dispatch }, favCoin) {
+      commit("REMOVE_CHARTDATA", favCoin);
+      dispatch("removeFavCoin", favCoin);
     },
 
     addFavCoin({ commit }, favCoin) {

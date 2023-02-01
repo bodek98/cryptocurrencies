@@ -28,7 +28,14 @@
         >
           <td class="table__coin--small table__coin--alignCenter">
             <span @click="addFavCoin(coin)">
-              <font-awesome-icon icon="fa-regular fa-star" />
+              <font-awesome-icon
+                class="coin__star--regular"
+                icon="fa-regular fa-star"
+              />
+              <font-awesome-icon
+                class="coin__star--solid"
+                icon="fa-solid fa-star"
+              />
             </span>
           </td>
           <td class="table__coin table__coin--small table__coin--alignCenter">

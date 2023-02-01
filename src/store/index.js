@@ -51,6 +51,7 @@ export default createStore({
       } else {
         console.log("too much coins!");
       }
+      document.getElementById(favCoin.id + "-row").classList.add("selected");
     },
 
     REMOVE_FAVCOIN: (state, favCoin) => {
@@ -58,6 +59,7 @@ export default createStore({
         (obj) => obj.id === favCoin.id
       );
       state.favCoins.splice(objWithIdIndex, 1);
+      document.getElementById(favCoin.id + "-row").classList.remove("selected");
     },
   },
   actions: {
@@ -69,6 +71,15 @@ export default createStore({
           )
           .then((res) => {
             commit("GET_COINS", res.data);
+            const blockSelectedCoins = () => {
+              console.log(this.state.favCoins);
+              this.state.favCoins.forEach((element) => {
+                document
+                  .getElementById(element.id + "-row")
+                  .classList.add("selected");
+              });
+            };
+            blockSelectedCoins();
           });
       } catch (error) {
         console.log(error);

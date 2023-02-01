@@ -36,6 +36,19 @@
       background-color: rgba(45, 117, 218, 0.164);
       cursor: pointer;
     }
+    & .coin__star--solid {
+      display: none;
+    }
+    &.selected {
+      background-color: #ddd;
+      & .coin__star--solid {
+        display: inline-block;
+        color: rgb(204, 178, 30);
+      }
+      & .coin__star--regular {
+        display: none;
+      }
+    }
   }
   &__coin {
     width: 15%;

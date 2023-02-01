@@ -10,10 +10,14 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 /* import specific icons */
 import { faBitcoin } from "@fortawesome/free-brands-svg-icons";
-import { faStar } from "@fortawesome/free-regular-svg-icons";
+import { faStar as faStarSolid } from "@fortawesome/free-solid-svg-icons";
+import {
+  faStar as faStarRegular,
+  faTrashCan,
+} from "@fortawesome/free-regular-svg-icons";
 
 /* add icons to the library */
-library.add(faBitcoin, faStar);
+library.add(faBitcoin, faStarSolid, faStarRegular, faTrashCan);
 
 createApp(App)
   .use(store)

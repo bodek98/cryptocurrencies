@@ -25,17 +25,14 @@ export default createStore({
         dates.value.push(date.getHours());
       });
       state.chartLabels = dates.value;
-      state.chartDatasets.push({
-        // fill: {
-        //   target: "origin",
-        //   above: "rgb(255, 0, 0)", // Area will be red above the origin
-        //   below: "rgb(0, 0, 255)", // And blue below the origin
-        // },
-        label: favCoinData.favCoin.name,
-        data: favCoinData.prices,
-        borderColor: "#" + randomColor,
-        backgroundColor: "#" + randomColor,
-      });
+      if (state.favCoins.length < 5) {
+        state.chartDatasets.push({
+          label: favCoinData.favCoin.name,
+          data: favCoinData.prices,
+          borderColor: "#" + randomColor,
+          backgroundColor: "#" + randomColor,
+        });
+      }
     },
 
     REMOVE_CHARTDATA: (state, favCoin) => {
@@ -48,10 +45,10 @@ export default createStore({
     ADD_FAVCOIN: (state, favCoin) => {
       if (state.favCoins.length < 5) {
         state.favCoins.push(favCoin);
+        document.getElementById(favCoin.id + "-row").classList.add("selected");
       } else {
         console.log("too much coins!");
       }
-      document.getElementById(favCoin.id + "-row").classList.add("selected");
     },
 
     REMOVE_FAVCOIN: (state, favCoin) => {

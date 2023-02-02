@@ -25,9 +25,14 @@
             </tr>
           </thead>
           <!-- table data -->
-          <tr v-for="coin in favCoins" :key="coin.name" class="table__row">
+          <tr
+            @click="removeFavCoin(coin)"
+            v-for="coin in favCoins"
+            :key="coin.name"
+            class="table__row"
+          >
             <td class="table__coin--small table__coin--alignCenter">
-              <span @click="removeFavCoin(coin)">
+              <span>
                 <font-awesome-icon icon="fa-regular fa-trash-can" />
               </span>
             </td>

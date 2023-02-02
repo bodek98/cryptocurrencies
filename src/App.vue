@@ -8,25 +8,21 @@
 </template>
 
 <script>
-import CryptoFav from "./components/CryptoFav/CryptoFav.vue";
-import CryptoTable from "./components/CryptoTable/CryptoTable.vue";
 import TheHeader from "./components/Header/TheHeader.vue";
 import CryptoChart from "./components/CryptoChart/CryptoChart.vue";
-import { ref } from "vue";
+import CryptoFav from "./components/CryptoFav/CryptoFav.vue";
+import CryptoTable from "./components/CryptoTable/CryptoTable.vue";
 
 export default {
   name: "App",
   components: {
-    CryptoFav,
-    CryptoTable,
     TheHeader,
     CryptoChart,
+    CryptoFav,
+    CryptoTable,
   },
   setup() {
-    let isCryptoSelected = ref(false);
-    return {
-      isCryptoSelected,
-    };
+    return {};
   },
 };
 </script>

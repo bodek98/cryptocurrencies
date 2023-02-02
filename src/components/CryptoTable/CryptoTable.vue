@@ -21,13 +21,14 @@
         </thead>
         <!-- table data -->
         <tr
+          @click="addFavCoin(coin)"
           v-for="coin in $store.state.coins"
           :key="coin.name"
           class="table__row"
           :id="coin.id + '-row'"
         >
           <td class="table__coin--small table__coin--alignCenter">
-            <span @click="addFavCoin(coin)">
+            <span>
               <font-awesome-icon
                 class="coin__star--regular"
                 icon="fa-regular fa-star"

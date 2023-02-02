@@ -1,12 +1,12 @@
 <template>
   <div class="mainContainer">
     <TheHeader />
-    <div id="mainLayout">
-      <div id="chartAndFavs">
+    <div class="layout">
+      <div class="layout__chartAndFavs">
         <CryptoChart />
         <CryptoFav />
       </div>
-      <div id="allCryptoList">
+      <div class="layout__allCryptoList">
         <CryptoTable />
       </div>
     </div>

@@ -36,10 +36,10 @@ html {
   row-gap: 3rem;
 }
 
-#mainLayout {
+.layout {
   width: max-content;
 }
-#mainLayout > * {
+.layout > * {
   margin: 8px;
 }
 
@@ -48,8 +48,8 @@ html {
   html {
     font-size: 2vw;
   }
-  #chartAndFavs,
-  #allCryptoList {
+  .layout__chartAndFavs,
+  .layout__allCryptoList {
     width: 90vw;
   }
 }
@@ -62,22 +62,22 @@ html {
   .mainContainer {
     row-gap: 0;
   }
-  #mainLayout {
+  .layout {
     display: flex;
     justify-content: space-evenly;
     width: 100%;
     flex-wrap: nowrap;
-  }
-  #chartAndFavs,
-  #allCryptoList {
-    display: flex;
-    flex-direction: column;
-    width: 50vw;
-    height: calc(100vh - 110px);
-    max-height: calc(100vh - 110px);
-  }
-  #allCryptoList {
-    margin-left: 0;
+    &__chartAndFavs,
+    &__allCryptoList {
+      display: flex;
+      flex-direction: column;
+      width: 50vw;
+      height: calc(100vh - 110px);
+      max-height: calc(100vh - 110px);
+    }
+    &__allCryptoList {
+      margin-left: 0;
+    }
   }
 }
 

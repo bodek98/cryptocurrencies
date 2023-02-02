@@ -1,5 +1,5 @@
 <template>
-  <div id="cryptoChartPanel">
+  <div class="cryptoChartPanel">
     <canvas id="cryptoChart" style="height: 300px"></canvas>
   </div>
 </template>

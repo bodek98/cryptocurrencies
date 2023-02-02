@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="cryptoChartPanel">
     <canvas id="cryptoChart" style="height: 300px"></canvas>
   </div>
 </template>
@@ -22,6 +22,8 @@ export default {
       }
     );
 
+    const gridColor = "rgba(255,255,255,0.1)";
+
     onMounted(async () => {
       const ctx = document.getElementById("cryptoChart").getContext("2d");
       chart = new Chart(ctx, {
@@ -43,9 +45,26 @@ export default {
               propagate: true,
             },
           },
+          scales: {
+            y: {
+              grid: {
+                color: gridColor,
+              },
+            },
+            x: {
+              grid: {
+                color: gridColor,
+              },
+            },
+          },
         },
+      });
+      window.addEventListener("resize", () => {
+        chart.resize();
       });
     });
   },
 };
 </script>
+
+<style src="./CryptoChart.scss" lang="scss"></style>

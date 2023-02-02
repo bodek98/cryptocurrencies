@@ -76,7 +76,7 @@ export default createStore({
                   .classList.add("selected");
               });
             };
-            blockSelectedCoins();
+            blockSelectedCoins(); 
           });
       } catch (error) {
         console.log(error);

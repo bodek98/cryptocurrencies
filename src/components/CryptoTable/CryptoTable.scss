@@ -1,19 +1,10 @@
-.title {
-  margin: 1rem 0;
-}
 .table {
-  // position: absolute;
-  // margin: 1rem auto 0 auto;
-  // left: 0;
-  // right: 0;
-  background-color: #fff;
-  padding: 10px 30px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 75vw;
-  // min-width: 670px;
+  background-color: var(--primary-color);
+  font-size: 1rem;
+  width: 100%;
   color: var(--font);
+  flex-grow: 1;
+  overflow: auto;
   &__data {
     display: flex;
     flex-direction: column;
@@ -26,12 +17,14 @@
     align-items: center;
     gap: 1rem;
     margin-bottom: 1rem;
+    padding: 1rem 1rem 0 1rem;
   }
   &__row {
     display: flex;
     justify-content: space-around;
     align-items: center;
     gap: 1rem;
+    padding-inline: 1rem;
     &:hover {
       background-color: rgba(45, 117, 218, 0.164);
       cursor: pointer;
@@ -40,10 +33,10 @@
       display: none;
     }
     &.selected {
-      background-color: #ddd;
+      background-color: rgba(169, 138, 255, 0.1);
       & .coin__star--solid {
         display: inline-block;
-        color: rgb(204, 178, 30);
+        color: gold;
       }
       & .coin__star--regular {
         display: none;
@@ -53,12 +46,14 @@
   &__coin {
     width: 15%;
     text-align: end;
-    font-size: 1rem;
     &--small {
       width: 5%;
     }
     &--alignCenter {
       text-align: center;
+    }
+    &--alignStart {
+      text-align: start;
     }
     &--data {
       display: flex;
@@ -68,7 +63,7 @@
     }
     &--symbol {
       font-size: 0.7rem;
-      color: rgba(0, 0, 0, 0.308);
+      color: rgba(255, 255, 255, 0.3);
     }
     &--logo {
       height: 2rem;

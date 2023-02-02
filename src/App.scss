@@ -1,0 +1,104 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600&display=swap");
+
+:root {
+  --primary-color: rgb(8, 18, 28);
+  --bg-color: rgb(18, 28, 42);
+  --border: 0.5px solid rgb(190, 190, 190);
+  --coin: rgb(255, 126, 40);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-color);
+  color: rgb(255, 255, 255);
+}
+
+html {
+  font-size: 14px;
+}
+
+#app {
+  font-family: "Noto Sans", sans-serif;
+  font-size: 20px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.mainContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  row-gap: 3rem;
+}
+
+#mainLayout {
+  width: max-content;
+}
+#mainLayout > * {
+  margin: 8px;
+}
+
+/* Scale for super small devices */
+@media only screen and (max-width: 740px) {
+  html {
+    font-size: 2vw;
+  }
+  #chartAndFavs,
+  #allCryptoList {
+    width: 90vw;
+  }
+}
+
+/* Desktop */
+@media only screen and (min-width: 1280px) {
+  body {
+    overflow: hidden;
+  }
+  .mainContainer {
+    row-gap: 0;
+  }
+  #mainLayout {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    flex-wrap: nowrap;
+  }
+  #chartAndFavs,
+  #allCryptoList {
+    display: flex;
+    flex-direction: column;
+    width: 50vw;
+    height: calc(100vh - 110px);
+    max-height: calc(100vh - 110px);
+  }
+  #allCryptoList {
+    margin-left: 0;
+  }
+}
+
+/* Scrollbar styling */
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--coin);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

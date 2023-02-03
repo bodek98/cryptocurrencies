@@ -74,4 +74,4 @@ export default {
 };
 </script>
 
-<style></style>
+<style src="./CryptoFav.scss" lang="scss"></style>

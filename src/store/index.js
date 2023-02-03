@@ -15,7 +15,7 @@ export default createStore({
       state.coins = coins;
     },
 
-    ADD_CHARTDATA: (state, favCoinData) => {
+    MANAGE_NEWFAVCOIN: (state, favCoinData) => {
       let randomColor = Math.floor(Math.random() * 16777215).toString(16);
       let time = ref([]);
       let dates = ref([]);
@@ -102,7 +102,7 @@ export default createStore({
             for (let i = 0; i < this.state.favCoins.length; i++) {
               if (this.state.favCoins[i].id === favCoin.id) return;
             }
-            commit("ADD_CHARTDATA", { prices, favCoin });
+            commit("MANAGE_NEWFAVCOIN", { prices, favCoin });
             dispatch("addFavCoin", favCoin);
           });
       } catch (error) {

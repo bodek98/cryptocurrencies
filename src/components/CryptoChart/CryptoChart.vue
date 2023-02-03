@@ -42,11 +42,6 @@ export default {
             },
           },
           responsive: true,
-          plugins: {
-            filler: {
-              propagate: true,
-            },
-          },
           scales: {
             y: {
               grid: {

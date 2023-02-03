@@ -1,6 +1,12 @@
 <template>
   <h3 class="title">Favourite coins</h3>
-  <div class="table">
+  <div id="fav-coin-table" class="table">
+    <div class="loading-screen">
+      <div class="loading-screen__ripple">
+        <div></div>
+        <div></div>
+      </div>
+    </div>
     <table class="table__data">
       <!-- table head -->
       <thead>

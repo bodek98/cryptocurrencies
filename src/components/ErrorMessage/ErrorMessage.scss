@@ -1,0 +1,25 @@
+.error {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--error-color);
+  font-size: 16px;
+  padding: 0.4em 1.6em;
+  border-radius: 6px;
+  display: none;
+  z-index: 10;
+  &.active {
+    display: block;
+    opacity: 0;
+    animation: dissapear 5s ease-in-out;
+  }
+  @keyframes dissapear {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+}

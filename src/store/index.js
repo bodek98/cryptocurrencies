@@ -85,7 +85,7 @@ export default createStore({
             blockSelectedCoins();
           });
       } catch (error) {
-        dispatch("checkIfCORSError", error);
+        dispatch("handleError", error);
       }
     },
 
@@ -106,7 +106,7 @@ export default createStore({
             dispatch("addFavCoin", favCoin);
           });
       } catch (error) {
-        dispatch("checkIfCORSError", error);
+        dispatch("handleError", error);
       }
     },
 
@@ -128,16 +128,16 @@ export default createStore({
       this.state.favCoins.forEach((favCoin) => {
         coinString += favCoin.id + ",";
       });
-
-      commit("CLEAR_FAVCOIN_DATA");
-
       if (coinString.length == 0) return;
 
+      commit("CLEAR_FAVCOIN_DATA");
       dispatch("getAllFavCoinsData", coinString);
     },
 
     async getAllFavCoinsData({ dispatch }, coinString) {
-      console.log(coinString);
+      const tableElement = document.getElementById("fav-coin-table");
+      tableElement.classList.add("loading");
+
       try {
         await axios
           .get(
@@ -151,18 +151,20 @@ export default createStore({
             });
           });
       } catch (error) {
-        dispatch("checkIfCORSError", error);
+        dispatch("handleError", error);
       }
+
+      tableElement.classList.remove("loading");
     },
 
-    checkIfCORSError(error) {
-      if (error.code == "ERR_NETWORK") {
-        // Show HTML + CSS panel with text:
-        // "API calls limit exceeded, please try again after 1 minute"
-        console.log(
-          "API calls limit exceeded, please try again after 1 minute"
-        );
-      }
+    handleError(error) {
+      const errorElement = document.getElementById("cors-error");
+
+      errorElement.classList.add("active");
+      setTimeout(() => {
+        errorElement.classList.remove("active");
+      }, 5000);
+
       console.log(error);
     },
   },

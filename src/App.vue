@@ -1,6 +1,7 @@
 <template>
   <div class="mainContainer">
     <TheHeader />
+    <ErrorMessage />
     <div class="layout">
       <div class="layout__chartAndFavs">
         <CryptoChart />
@@ -15,6 +16,7 @@
 
 <script>
 import TheHeader from "./components/Header/TheHeader.vue";
+import ErrorMessage from "./components/ErrorMessage/ErrorMessage.vue";
 import CryptoChart from "./components/CryptoChart/CryptoChart.vue";
 import CryptoFav from "./components/CryptoFav/CryptoFav.vue";
 import CryptoTable from "./components/CryptoTable/CryptoTable.vue";
@@ -23,6 +25,7 @@ export default {
   name: "App",
   components: {
     TheHeader,
+    ErrorMessage,
     CryptoChart,
     CryptoFav,
     CryptoTable,

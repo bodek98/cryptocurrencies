@@ -25,6 +25,8 @@ export default {
     const gridColor = "rgba(255,255,255,0.1)";
 
     onMounted(async () => {
+      store.dispatch("updateFavCoins");
+
       const ctx = document.getElementById("cryptoChart").getContext("2d");
       chart = new Chart(ctx, {
         type: "line",
@@ -62,6 +64,7 @@ export default {
       window.addEventListener("resize", () => {
         chart.resize();
       });
+      chart.update();
     });
   },
 };

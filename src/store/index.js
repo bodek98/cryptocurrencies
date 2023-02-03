@@ -58,9 +58,16 @@ export default createStore({
       state.favCoins.splice(objWithIdIndex, 1);
       document.getElementById(favCoin.id + "-row").classList.remove("selected");
     },
+
+    CLEAR_FAVCOIN_DATA: (state) => {
+      // object = []; is not enough as it breakes v-fors based on the object
+      // splice for whole length of an array is needed
+      state.chartDatasets.splice(0, state.chartDatasets.length);
+      state.favCoins.splice(0, state.favCoins.length);
+    },
   },
   actions: {
-    async getCoins({ commit }) {
+    async getCoins({ commit, dispatch }) {
       try {
         await axios
           .get(
@@ -69,35 +76,38 @@ export default createStore({
           .then((res) => {
             commit("GET_COINS", res.data);
             const blockSelectedCoins = () => {
-              console.log(this.state.favCoins);
               this.state.favCoins.forEach((element) => {
                 document
                   .getElementById(element.id + "-row")
                   .classList.add("selected");
               });
             };
-            blockSelectedCoins(); 
+            blockSelectedCoins();
           });
       } catch (error) {
-        console.log(error);
+        dispatch("checkIfCORSError", error);
       }
     },
 
-    async addChartData({ commit, dispatch }, favCoin) {
-      await axios
-        .get(
-          "https://api.coingecko.com/api/v3/coins/" +
-            favCoin.id +
-            "/market_chart?vs_currency=usd&days=1&interval=hourly"
-        )
-        .then((res) => {
-          const prices = res.data.prices;
-          for (let i = 0; i < this.state.favCoins.length; i++) {
-            if (this.state.favCoins[i].id === favCoin.id) return;
-          }
-          commit("ADD_CHARTDATA", { prices, favCoin });
-          dispatch("addFavCoin", favCoin);
-        });
+    async manageNewFavCoin({ commit, dispatch }, favCoin) {
+      try {
+        await axios
+          .get(
+            "https://api.coingecko.com/api/v3/coins/" +
+              favCoin.id +
+              "/market_chart?vs_currency=usd&days=1&interval=hourly"
+          )
+          .then((res) => {
+            const prices = res.data.prices;
+            for (let i = 0; i < this.state.favCoins.length; i++) {
+              if (this.state.favCoins[i].id === favCoin.id) return;
+            }
+            commit("ADD_CHARTDATA", { prices, favCoin });
+            dispatch("addFavCoin", favCoin);
+          });
+      } catch (error) {
+        dispatch("checkIfCORSError", error);
+      }
     },
 
     async removeChartData({ commit, dispatch }, favCoin) {
@@ -111,6 +121,49 @@ export default createStore({
 
     removeFavCoin({ commit }, favCoin) {
       commit("REMOVE_FAVCOIN", favCoin);
+    },
+
+    updateFavCoins({ commit, dispatch }) {
+      let coinString = "";
+      this.state.favCoins.forEach((favCoin) => {
+        coinString += favCoin.id + ",";
+      });
+
+      commit("CLEAR_FAVCOIN_DATA");
+
+      if (coinString.length == 0) return;
+
+      dispatch("getAllFavCoinsData", coinString);
+    },
+
+    async getAllFavCoinsData({ dispatch }, coinString) {
+      console.log(coinString);
+      try {
+        await axios
+          .get(
+            "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=" +
+              coinString.toString() +
+              "&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=1h"
+          )
+          .then((res) => {
+            res.data.forEach((coin) => {
+              dispatch("manageNewFavCoin", coin);
+            });
+          });
+      } catch (error) {
+        dispatch("checkIfCORSError", error);
+      }
+    },
+
+    checkIfCORSError(error) {
+      if (error.code == "ERR_NETWORK") {
+        // Show HTML + CSS panel with text:
+        // "API calls limit exceeded, please try again after 1 minute"
+        console.log(
+          "API calls limit exceeded, please try again after 1 minute"
+        );
+      }
+      console.log(error);
     },
   },
   plugins: [createPersistedState()],

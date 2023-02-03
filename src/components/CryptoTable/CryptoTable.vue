@@ -65,7 +65,7 @@ export default {
       return store.dispatch("getCoins");
     };
     const addFavCoin = (coin) => {
-      return store.dispatch("addChartData", coin);
+      return store.dispatch("manageNewFavCoin", coin);
     };
 
     getCoins();

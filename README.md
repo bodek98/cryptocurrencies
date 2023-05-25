@@ -1,5 +1,9 @@
 # Coinmaster
 
+## 🎮 Demo
+
+https://tigranmanukyan.art/coinmaster/
+
 ## 🗒️ Description
 
 Coinmaster is a cryptocurrency tracking application that gives 24 hours insights of top 100 coins.
